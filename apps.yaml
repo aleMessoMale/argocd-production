@@ -1,3 +1,7 @@
+#  Il modo in cui noi procediamo per far si che le modifiche che effettuiamo agli yaml di Helm in argocd-production
+#  siano applicati immediatamente alla modifica, è creare quello che viene chiamato app di apps, ossia creare
+#  un’application che punta al repo argocd-production e alla folder helm, nel quale son presenti le definizioni delle
+#  2 app (che fa parte del project app argo production)
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
@@ -12,6 +16,7 @@ spec:
     targetRevision: HEAD
     path: helm
   destination:
+    # deploya su cluster in cui argocd è installato e namespace production
     server: https://kubernetes.default.svc
     namespace: production
   syncPolicy:
