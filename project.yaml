@@ -8,21 +8,47 @@
 
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
+# nome e namespace nel quale il progetto è stato creato
 metadata:
+  # nome del progetto, questo fa scopa con il campo metadata.project dell'app
   name: production
   namespace: argocd
   finalizers:
     - resources-finalizer.argocd.argoproj.io
 spec:
   description: Production project
+  # può utilizzare ogni source repo
   sourceRepos:
     - '*'
+  # possiamo deployare in questi due namespaces
   destinations:
-    - namespace: '*'
+    - namespace: production
       server: https://kubernetes.default.svc
+    - namespace: argocd
+      server: https://kubernetes.default.svc
+  # a livello cluster possiamo creare namespaces
   clusterResourceWhitelist:
-    - group: '*'
-      kind: '*'
+    - group: ''
+      kind: Namespace
+  # queste risorse non le possiamo creare fondamentalmente...
+  namespaceResourceBlacklist:
+    - group: ''
+      kind: ResourceQuota
+    - group: ''
+      kind: LimitRange
+    - group: ''
+      kind: NetworkPolicy
+  # queste risorse le possiamo creare nel progetto, possiamo creare questa tipologia di oggetti
   namespaceResourceWhitelist:
-    - group: '*'
-      kind: '*'
+    - group: 'apps'
+      kind: Deployment
+    - group: 'apps'
+      kind: StatefulSet
+    - group: 'extensions/v1beta1'
+      kind: Ingress
+    - group: 'networking.k8s.io/v1'
+      kind: Ingress
+    - group: 'v1'
+      kind: Service
+    - group: 'argoproj.io/v1alpha1'
+      kind: Application
