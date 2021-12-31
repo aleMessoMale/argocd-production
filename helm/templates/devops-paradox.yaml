@@ -13,7 +13,7 @@ spec:
   # dove è il codice? sul path helm del repo https://github.com/vfarcic/devops-paradox.git alla revision HEAD
   source:
     path: helm
-    repoURL: https://github.com/vfarcic/devops-paradox.git
+    repoURL: https://github.com/aleMessoMale/devops-paradox.git
     targetRevision: HEAD
     # sovrascrivi quanto presente nel file values.yaml con questi valori
     helm:
