@@ -26,18 +26,21 @@ spec:
       server: https://kubernetes.default.svc
     - namespace: argocd
       server: https://kubernetes.default.svc
-  # a livello cluster possiamo creare namespaces
   clusterResourceWhitelist:
-    - group: ''
-      kind: Namespace
+    - group: '*'
+      kind: '*'
+  # a livello cluster possiamo creare namespaces
+  #clusterResourceWhitelist:
+  #  - group: ''
+  #    kind: Namespace
   # queste risorse non le possiamo creare fondamentalmente...
-  namespaceResourceBlacklist:
-    - group: ''
-      kind: ResourceQuota
-    - group: ''
-      kind: LimitRange
-    - group: ''
-      kind: NetworkPolicy
+  #namespaceResourceBlacklist:
+  #  - group: ''
+  #    kind: ResourceQuota
+  #  - group: ''
+  #    kind: LimitRange
+  #  - group: ''
+  #    kind: NetworkPolicy
   # queste risorse le possiamo creare nel progetto, possiamo creare questa tipologia di oggetti
   # namespaceResourceWhitelist:
   #  - group: 'apps'
