@@ -10,6 +10,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 # nome e namespace nel quale il progetto è stato creato
 metadata:
+  # nome del progetto, questo fa scopa con il campo metadata.project dell'app
   name: production
   namespace: argocd
   finalizers:
