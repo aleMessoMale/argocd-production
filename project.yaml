@@ -52,3 +52,9 @@ spec:
       kind: Service
     - group: 'argoproj.io'
       kind: Application
+    - group: 'extensions'
+      kind: Ingress
+    - group: ''
+      kind: Service
+    - group: 'networking.k8s.io'
+      kind: Ingress
